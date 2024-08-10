@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
@@ -9,9 +10,10 @@ import EditProfile from './components/EditProfile/EditProfile';
 import Settings from './components/Settings/Settings';
 import Security from './components/Security/Security';
 import Login from './components/Auth/Login';
-import Signup from './components/Auth/Signup'; // Import Signup
+import Signup from './components/Auth/Signup';
 import Favourites from './components/Favourites/Favourites';
-import LandingPage from './components/LandingPage/LandingPage'; // Import LandingPage
+import LandingPage from './components/LandingPage/LandingPage';
+import ForgotPassword from './components/Auth/ForgotPassword'; // Import ForgotPassword
 
 const App: React.FC = () => {
     return (
@@ -27,8 +29,9 @@ const App: React.FC = () => {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} /> {/* Add the Signup route */}
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/favourites" element={<Favourites />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add the Forgot Password route */}
             </Routes>
         </Router>
     );

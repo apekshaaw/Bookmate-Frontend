@@ -1,41 +1,30 @@
-// src/components/Auth/Signup.tsx
+
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { signupUser } from '../../utils/apiService'; // Adjust path as necessary
-import logo from '../../assets/images/bookmate.png'; // Adjust path as necessary
+import { resetPassword } from '../../utils/apiService';  // Ensure this import matches the export
 
-const Signup: React.FC = () => {
+const ForgotPassword: React.FC = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const [success, setSuccess] = useState('');
 
-    const handleSignup = async () => {
-        if (password !== confirmPassword) {
-            setError("Passwords do not match");
-            return;
-        }
-
+    const handleResetPassword = async () => {
         try {
-            const response = await signupUser({ email, password });
-            if (response === 'Signup successful') {
-                navigate('/login'); // Redirect to login page after signup
+            const response = await resetPassword({ email, currentPassword, newPassword });
+            if (response === 'Password reset successful') {
+                setSuccess('Password reset successful');
             } else {
-                setError('Signup failed. Please try again.');
+                setError('Password reset failed');
             }
         } catch (error) {
             setError('An error occurred. Please try again.');
         }
     };
 
-    const handleLogin = () => {
-        navigate('/login');
-    };
-
     return (
         <div style={styles.container}>
-            <img src={logo} alt="Bookmate Logo" style={styles.logo} />
             <div style={styles.form}>
                 <input
                     type="email"
@@ -46,23 +35,21 @@ const Signup: React.FC = () => {
                 />
                 <input
                     type="password"
-                    placeholder="Enter password"
+                    placeholder="Enter Current Password"
                     style={styles.input}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
                 />
                 <input
                     type="password"
-                    placeholder="Confirm password"
+                    placeholder="Enter New Password"
                     style={styles.input}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                 />
                 {error && <div style={styles.error}>{error}</div>}
-                <button onClick={handleSignup} style={styles.button}>Sign Up</button>
-                <div style={styles.footer}>
-                    <p>Already have an Account? <a onClick={handleLogin} style={styles.link}>Login</a></p>
-                </div>
+                {success && <div style={styles.success}>{success}</div>}
+                <button onClick={handleResetPassword} style={styles.button}>Reset Password</button>
             </div>
         </div>
     );
@@ -77,10 +64,6 @@ const styles = {
         height: '100vh',
         backgroundColor: '#ffffff',
         textAlign: 'center' as const,
-    },
-    logo: {
-        width: '150px',
-        marginBottom: '20px',
     },
     form: {
         display: 'flex',
@@ -107,19 +90,14 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
     },
-    footer: {
-        marginTop: '20px',
-        textAlign: 'center' as const,
-    },
-    link: {
-        color: '#91B5A6',
-        textDecoration: 'none',
-        cursor: 'pointer',
-    },
     error: {
         color: 'red',
         marginBottom: '10px',
     },
+    success: {
+        color: 'green',
+        marginBottom: '10px',
+    },
 };
 
-export default Signup;
+export default ForgotPassword;

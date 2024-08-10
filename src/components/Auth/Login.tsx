@@ -1,3 +1,4 @@
+// src/components/Auth/Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../utils/apiService'; // Adjust path as necessary
@@ -26,6 +27,10 @@ const Login: React.FC = () => {
         navigate('/signup');
     };
 
+    const handleForgotPassword = () => {
+        navigate('/forgot-password');
+    };
+
     return (
         <div style={styles.container}>
             <img src={logo} alt="Bookmate Logo" style={styles.logo} />
@@ -51,7 +56,7 @@ const Login: React.FC = () => {
                 </div>
                 <button onClick={handleLogin} style={styles.button}>Log In</button>
                 <div style={styles.footer}>
-                    <a href="#" style={styles.link}>Forgot Password?</a>
+                    <a onClick={handleForgotPassword} style={styles.link}>Forgot Password?</a>
                     <p>Don't have an account? <a onClick={handleSignup} style={styles.link}>Signup</a></p>
                 </div>
             </div>

@@ -1,25 +1,36 @@
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:8070'; // Your backend URL
+const api = axios.create({
+    baseURL: 'http://localhost:8070',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+});
 
-// Example function to save a user
-export const saveUser = async (user: any) => {
+export const loginUser = async (data) => {
     try {
-        const response = await axios.post(`${apiUrl}/User/save`, user);
+        const response = await api.post('/User/login', data);
         return response.data;
     } catch (error) {
-        console.error('Error saving user:', error);
         throw error;
     }
 };
 
-// Example function to login a user
-export const loginUser = async (user: any) => {
+export const signupUser = async (data) => {
     try {
-        const response = await axios.post(`${apiUrl}/User/login`, user);
+        const response = await api.post('/User/save', data);
         return response.data;
     } catch (error) {
-        console.error('Error logging in user:', error);
+        throw error;
+    }
+};
+
+export const resetPassword = async (data) => {  // Add this function
+    try {
+        const response = await api.post('/User/reset-password', data);
+        return response.data;
+    } catch (error) {
         throw error;
     }
 };
