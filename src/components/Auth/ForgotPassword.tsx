@@ -35,14 +35,14 @@ const ForgotPassword: React.FC = () => {
                 />
                 <input
                     type="password"
-                    placeholder="Enter Current Password"
+                    placeholder="Enter New Password"
                     style={styles.input}
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                 />
                 <input
                     type="password"
-                    placeholder="Enter New Password"
+                    placeholder="Enter Password Again"
                     style={styles.input}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}

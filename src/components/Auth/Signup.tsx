@@ -1,4 +1,3 @@
-// src/components/Auth/Signup.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signupUser } from '../../utils/apiService'; // Adjust path as necessary
